@@ -1,6 +1,7 @@
 import streamlit as st
 from collections import Counter
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Function for Heaps' Law
 def heaps_law(num_tokens, k=44, b=0.49):
@@ -69,3 +70,15 @@ elif law_choice == "Zipf's Law":
     if st.button("Calculate Zipf's Law"):
         estimated_freq = zipfs_law(word_counts, rank, s)
         st.write(f"**Estimated Frequency for Rank {rank} (Zipf's Law):** {estimated_freq}")
+
+    # Plot word frequency distribution
+    st.subheader("Zipf's Law Frequency Distribution")
+    plt.figure(figsize=(10, 6))
+    plt.plot(ranks, frequencies, marker='o', linestyle='-', color='b', label="Actual Frequency")
+    plt.xlabel("Rank (r)")
+    plt.ylabel("Frequency (f)")
+    plt.title("Word Frequency Distribution (Zipf's Law)")
+    plt.yscale("log")
+    plt.xscale("log")
+    plt.legend()
+    st.pyplot(plt)
